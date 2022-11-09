@@ -54,6 +54,7 @@ public class CategoryDAOMariaDB implements CategoryDAO {
         try(Connection conn = pcon.getConnection()) {
             PreparedStatement st = conn.prepareStatement("INSERT INTO category(name) VALUES(?)",Statement.RETURN_GENERATED_KEYS);
             st.setString(1,c.getName());
+            st.executeUpdate();
             ResultSet rs = st.getGeneratedKeys();
             rs.first();
             c = new Category(rs.getInt(1),c.getName());
@@ -69,10 +70,11 @@ public class CategoryDAOMariaDB implements CategoryDAO {
         try(Connection conn = pcon.getConnection()) {
             PreparedStatement st = conn.prepareStatement("UPDATE category SET name = ? WHERE id = ?");
             st.setString(1,c.getName());
-            st.setString(1,c.getName());
-            ResultSet rs = st.getGeneratedKeys();
-            rs.first();
-            c = new Category(rs.getInt(1),c.getName());
+            st.setInt(2, c.getId());
+            int filas = st.executeUpdate();
+            if(filas > 0) {
+                actualizada = true;
+            }
         } catch(SQLException e) {
             System.err.println(e.getMessage());
         }
