@@ -100,7 +100,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        // ejemplo1();
+        ejemplo1();
         // System.out.println(" ---------------------- ");
         // ejemplo2();
         // ejemplo3();

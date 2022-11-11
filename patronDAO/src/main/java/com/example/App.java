@@ -1,10 +1,6 @@
 package com.example;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.List;
 
 import javax.sql.PooledConnection;
@@ -116,10 +112,10 @@ public class App {
     }
 
     public static void main( String[] args ) throws SQLException {
-        try (// Creamos Pool de conexiones MariaDB
-        MariaDbPoolDataSource pool = new MariaDbPoolDataSource("jdbc:mariadb://localhost:3306/product-manager?user=root&maxPoolSize=10")) {
+
+        MariaDbPoolDataSource pool = new MariaDbPoolDataSource("jdbc:mariadb://localhost:3306/product-manager?user=root");
             pcon = pool.getPooledConnection();
-        }
+        
         /*CategoryDAO catDao = new CategoryDAOMariaDB(pcon);
         List<Category> cats = catDao.findAll();
         cats.forEach(c -> System.out.println(c));*/
